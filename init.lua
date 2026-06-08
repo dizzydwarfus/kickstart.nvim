@@ -161,7 +161,7 @@ do
   })
 end
 
-  vim.keymap.set('n', '<leader>dd', ':Lexplore %:p:h<CR>', { desc = 'Open netrw in the directory of the current file' })
+  vim.keymap.set('n', '<leader>dd', ':Explore %:p:h<CR>', { desc = 'Open netrw in the directory of the current file' })
 -- ============================================================
 -- SECTION 2: PLUGIN MANAGER INTRO
 -- vim.pack intro, build hooks
