@@ -13,7 +13,7 @@ do
   vim.g.maplocalleader = ' '
 
   -- Set to true if you have a Nerd Font installed and selected in the terminal
-  vim.g.have_nerd_font = false
+  vim.g.have_nerd_font = true
 
   -- [[ Setting options ]]
   --  See `:help vim.o`
@@ -161,6 +161,7 @@ do
   })
 end
 
+  vim.keymap.set('n', '<leader>dd', ':Lexplore %:p:h<CR>', { desc = 'Open netrw in the directory of the current file' })
 -- ============================================================
 -- SECTION 2: PLUGIN MANAGER INTRO
 -- vim.pack intro, build hooks
@@ -670,6 +671,10 @@ do
   local ensure_installed = vim.tbl_keys(servers or {})
   vim.list_extend(ensure_installed, {
     -- You can add other tools here that you want Mason to install
+    'hclfmt',
+    'tflint',
+    'ruff',
+    'yamlfmt',
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
