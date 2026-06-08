@@ -617,6 +617,7 @@ do
     stylua = {}, -- Used to format Lua code
 
     -- Special Lua Config, as recommended by neovim help docs
+-- Special Lua Config, as recommended by neovim help docs
     lua_ls = {
       on_init = function(client)
         client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by stylua)
@@ -626,7 +627,15 @@ do
           if path ~= vim.fn.stdpath 'config' and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then return end
         end
 
-        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+        -- 1. Extract to a local variable
+        local lua_settings = client.config.settings.Lua
+        -- 2. Type-narrow and guarantee it's a table for both the type checker and runtime safety
+        if type(lua_settings) ~= 'table' then
+          lua_settings = {}
+        end
+
+        -- 3. Pass the safely guarded table into deep_extend
+        client.config.settings.Lua = vim.tbl_deep_extend('force', lua_settings, {
           runtime = {
             version = 'LuaJIT',
             path = { 'lua/?.lua', 'lua/?/init.lua' },
