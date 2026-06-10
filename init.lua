@@ -635,7 +635,16 @@ do
     rust_analyzer = {},
     -- Helm LSP
     helm_ls = {},
-    --
+    -- YAML LSP
+    yamlls = {
+      settings = {
+        yaml = {
+          validate = true,
+          completion = true,
+          hover = true,
+        },
+      },
+    },
     -- Some languages (like typescript) have entire language plugins that can be useful:
     --    https://github.com/pmizio/typescript-tools.nvim
     --
@@ -928,7 +937,7 @@ do
   -- NOTE: You can add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- require 'custom.plugins'
+  require 'custom.plugins'
 end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
